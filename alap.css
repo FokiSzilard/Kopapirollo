@@ -1,0 +1,44 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    color: green;
+    background-color: azure;
+}
+
+.kivalasztott{
+    border: 3px red solid;
+}
+
+.container{
+    -webkit-box-shadow: 10px 8px 15px 2px #6EFF71; 
+    box-shadow: 10px 8px 15px 2px #6EFF71;
+    background-color: white;
+    border-radius: 5%;
+    padding: 5px;
+    width: 500px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.container h1,h2,h3{
+    text-align: center;
+}
+
+
+.container-images{
+    display: flex;
+    flex-direction: row;
+}
+
+.container-images img{
+    display: block;
+    margin: auto;
+    width: 25%;
+}
+
+.Piros{
+    color: red;
+    text-shadow: 4px 2px 7px #CE230A;
+}
+
+
