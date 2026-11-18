@@ -41,4 +41,6 @@ body {
     text-shadow: 4px 2px 7px #CE230A;
 }
 
-
+.nemlatszik{
+    display: none;
+}

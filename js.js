@@ -1,7 +1,16 @@
 let userPoint = 0;
 let computerPoint = 0;
 
+let gyoztek=0;
+
 function jatek(userChoice){
+    if(userPoint == 10 || computerPoint == 10){
+        gyoztek=1
+    }
+    if (gyoztek==1){
+        document.getElementById('ujrakezdes').classList.remove('nemlatszik')
+        return
+    }
     let choice = ["ko","papir","ollo"]
     let random = Math.floor(Math.random()*3)
     
@@ -44,4 +53,14 @@ function jatek(userChoice){
             document.getElementById('vegeredmeny').innerHTML = "Eredmény Győztél!"
             document.getElementById('playerPoints').innerHTML = userPoint
         }
+}
+
+function ujrakezdes(){
+    document.getElementById('ujrakezdes').className += 'nemlatszik'
+    userPoint = 0
+    sdocument.getElementById('playerPoints').innerHTML = userPoint
+    computerPoint = 0
+    document.getElementById('computerPoints').innerHTML = computerPoint
+    gyoztek = 0
+    document.getElementById("gepkep").src = ''
 }
