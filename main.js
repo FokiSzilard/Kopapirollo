@@ -58,9 +58,9 @@ function jatek(userChoice){
 function ujrakezdes(){
     document.getElementById('ujrakezdes').className += 'nemlatszik'
     userPoint = 0
-    sdocument.getElementById('playerPoints').innerHTML = userPoint
+    document.getElementById('playerPoints').innerHTML = userPoint
     computerPoint = 0
     document.getElementById('computerPoints').innerHTML = computerPoint
     gyoztek = 0
-    document.getElementById("gepkep").src = ''
+    document.getElementById("gepkep").src = ""
 }
