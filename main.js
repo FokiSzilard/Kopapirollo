@@ -2,6 +2,41 @@ let userPoint = 0;
 let computerPoint = 0;
 
 let gyoztek=0;
+let Nev
+
+function adatMentes(){
+    let playerName = document.forms["adatok"]["playerName"].value 
+    if (nevEllenorzes(playerName) == true){
+        document.getElementById("hibaUzenet").innerHTML = ""
+        Nev = playerName
+    }
+    else{
+        document.getElementById("hibaUzenet").innerHTML = "Nem elég hosszú a név"
+        return
+    }
+
+    let playerEmail = document.forms["adatok"]["email"].value
+    if (emailEllenorzes(playerEmail) == false){
+        document.getElementById("hibaUzenet").innerHTML += "helytelen email formátum"
+        return
+    }
+}
+
+function nevEllenorzes(nev){
+    if (nev.length > 7 & nev.length < 21){
+        return true
+    }
+    else{
+        return false
+    }
+}
+
+function emailEllenorzes(email){
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return pattern.test(email)
+
+}
+
 
 function jatek(userChoice){
     if(userPoint == 10 || computerPoint == 10){
@@ -11,6 +46,11 @@ function jatek(userChoice){
         document.getElementById('ujrakezdes').classList.remove('nemlatszik')
         return
     }
+    if (Nev == null || Nev == ""){
+        document.getElementById("jatekHiba").innerHTML = "előbb töltsd ki az ürlapot"
+        return
+    }
+    document.getElementById("jatekHiba").innerHTML = ""
     let choice = ["ko","papir","ollo"]
     let random = Math.floor(Math.random()*3)
     

@@ -7,8 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
+        <form name="adatok">
+            <label for="nev">Add meg a neved:</label>
+            <input type="text" id="playerName">
+            <label for="email">Add meg az e-mail címed:</label>
+            <input type="text" id="email">
+            <button class="gomb" id="kuldes" onclick="adatMentes()" type="button">Bejelentkezés</button>
+            <p id="hibaUzenet"></p>
+        </form>
         <h1>Kő - Papír - Olló</h1>
+        <h2 id="jatekHiba"></h2>
         <h2>Válassz!</h2>
         <div class="container-images">
             <img src="img/ko.png" alt="Kő" id="ko" onclick="jatek('ko')">
@@ -24,7 +34,7 @@
         <h3 class="Piros" id="playerPoints">0</h3>
         <h3>Gép Pontja</h3>
         <h3 class="Piros" id="computerPoints">0</h3>
-        <button id="ujrakezdes" onclick="ujrakezdes()" class="nemlatszik">Újrakezdés</button>
+        <button id="ujrakezdes" onclick="ujrakezdes()" class="gomb nemlatszik">Újrakezdés</button>
     </div>
 
     <script src="main.js"></script>

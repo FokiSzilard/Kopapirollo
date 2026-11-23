@@ -44,3 +44,46 @@ body {
 .nemlatszik{
     display: none;
 }
+
+form{
+    text-align: center;
+    text-overflow: clip;
+    padding: 16px;
+    border: 1px solid #d6e8dc;
+    border-radius: 10px;
+    background-color: #f7fcf8;
+}
+
+form label{
+    display: inline-block;
+    margin: 6px 4px;
+    font-weight: bold;
+}
+
+form input{
+    width: 170px;
+    padding: 7px 9px;
+    border: 1px solid #b9d3c1;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+form input:focus{
+    outline: 2px solid #9bc9aa;
+    border-color: #4d9565;
+}
+
+.gomb{
+    display: block;
+    margin: 14px auto 4px;
+    padding: 8px 18px;
+    color: white;
+    background-color: #4d9565;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.gomb:hover{
+    background-color: #39784e;
+}
