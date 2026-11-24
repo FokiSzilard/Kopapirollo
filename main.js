@@ -1,3 +1,6 @@
+document.getElementById('ujrakezdes').style.visibility = 'hidden' 
+document.getElementById('mainform').style.display = 'block' 
+
 let userPoint = 0;
 let computerPoint = 0;
 
@@ -6,34 +9,45 @@ let Nev
 
 function adatMentes(){
     let playerName = document.forms["adatok"]["playerName"].value 
-    if (nevEllenorzes(playerName) == true){
-        document.getElementById("hibaUzenet").innerHTML = ""
-        Nev = playerName
-    }
-    else{
-        document.getElementById("hibaUzenet").innerHTML = "Nem elég hosszú a név"
+    let hiba = nevEllenorzes(playerName)
+    if (hiba != ""){
+        document.getElementById("hibaUzenet").innerHTML = hiba
         return
     }
+    else{
+        document.getElementById("hibaUzenet").innerHTML = "" 
+    }
+    
 
     let playerEmail = document.forms["adatok"]["email"].value
     if (emailEllenorzes(playerEmail) == false){
         document.getElementById("hibaUzenet").innerHTML += "helytelen email formátum"
         return
     }
+    document.getElementById('mainform').style.display = 'none' 
 }
 
 function nevEllenorzes(nev){
-    if (nev.length > 7 & nev.length < 21){
-        return true
+    const pattern = /^[a-zA-Z]+$/
+    try {
+        if(nev.length < 7) throw "Túl rövid a név"
+        if(nev.length > 21) throw "Túl hosszú a név"
+        if(!pattern.test(nev)) throw "Ne tartalmazzon számot"
+        return ""
+    } catch (error) {
+        return error;   
     }
-    else{
-        return false
-    }
+
+
 }
 
 function emailEllenorzes(email){
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return pattern.test(email)
+    try {
+        if(!email.includes('@')) throw "tartalmaznia kell @ karaktert"
+        
+    } catch (error) {
+        
+    }
 
 }
 
@@ -41,9 +55,15 @@ function emailEllenorzes(email){
 function jatek(userChoice){
     if(userPoint == 10 || computerPoint == 10){
         gyoztek=1
+        if (userPoint == 10){
+            document.getElementById('vegeredmeny').innerHTML = `Végeredmény: ${Nev} győzött`
+        }
+        else{
+            document.getElementById('vegeredmeny').innerHTML = `Végeredmény: gép győzött`
+        }
     }
     if (gyoztek==1){
-        document.getElementById('ujrakezdes').classList.remove('nemlatszik')
+    document.getElementById('ujrakezdes').style.visibility = 'visible' 
         return
     }
     if (Nev == null || Nev == ""){
@@ -70,7 +90,7 @@ function jatek(userChoice){
         {
             //dontetlen
             console.log("dontetlen"+ computerChoice)
-            document.getElementById('vegeredmeny').innerHTML = "Eredmény Döntetlen"
+            document.getElementById('vegeredmeny').innerHTML = "Döntetlen"
         }
     else if((userChoice == "ko" & computerChoice == "papir")
         || (userChoice == "papir" & computerChoice == "ollo")
@@ -80,7 +100,7 @@ function jatek(userChoice){
             //gep gyoz
             computerPoint++;
             console.log("vesztes"+ computerChoice)
-            document.getElementById('vegeredmeny').innerHTML = "Eredmény Vesztettél"
+            document.getElementById('vegeredmeny').innerHTML = `${Nev} Vesztett` 
             document.getElementById('computerPoints').innerHTML = computerPoint
         }
     else if((userChoice == "papir" & computerChoice == "ko")
@@ -90,13 +110,13 @@ function jatek(userChoice){
         {
             userPoint++;
             console.log("gyoztes"+ computerChoice)
-            document.getElementById('vegeredmeny').innerHTML = "Eredmény Győztél!"
+            document.getElementById('vegeredmeny').innerHTML = `${Nev} Győzött` 
             document.getElementById('playerPoints').innerHTML = userPoint
         }
 }
 
 function ujrakezdes(){
-    document.getElementById('ujrakezdes').className += 'nemlatszik'
+    document.getElementById('ujrakezdes').style.visibility = 'hidden' 
     userPoint = 0
     document.getElementById('playerPoints').innerHTML = userPoint
     computerPoint = 0
