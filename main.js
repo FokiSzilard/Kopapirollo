@@ -9,9 +9,9 @@ let Nev
 
 function adatMentes(){
     let playerName = document.forms["adatok"]["playerName"].value 
-    let hiba = nevEllenorzes(playerName)
-    if (hiba != ""){
-        document.getElementById("hibaUzenet").innerHTML = hiba
+    let nevhiba = nevEllenorzes(playerName)
+    if (nevhiba != ""){
+        document.getElementById("hibaUzenet").innerHTML = nevhiba
         return
     }
     else{
@@ -20,9 +20,13 @@ function adatMentes(){
     
 
     let playerEmail = document.forms["adatok"]["email"].value
-    if (emailEllenorzes(playerEmail) == false){
-        document.getElementById("hibaUzenet").innerHTML += "helytelen email formátum"
+    let emailhiba = nevEllenorzes(playerEmail)
+    if (emailhiba != ""){
+        document.getElementById("hibaUzenet").innerHTML = emailhiba
         return
+    }
+    else{
+        document.getElementById("hibaUzenet").innerHTML = "" 
     }
     document.getElementById('mainform').style.display = 'none' 
 }
@@ -44,9 +48,21 @@ function nevEllenorzes(nev){
 function emailEllenorzes(email){
     try {
         if(!email.includes('@')) throw "tartalmaznia kell @ karaktert"
-        
+
+        const [name,domain] = email.split('@')
+
+        if(!name) throw "Nincs előtagja az emailnak"
+
+        if(!domain) throw "Add meg a domain részét az emailnek"
+
+        if(!domain.includes('.')) throw "A domainnek tartalmaznia kell pontot"
+
+        if(/[\s@]/.test(neve)) throw "Nem tartalmazhat szóközt az email"
+
+        return ""
+
     } catch (error) {
-        
+        return error
     }
 
 }
