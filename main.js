@@ -9,26 +9,15 @@ let Nev
 
 function adatMentes(){
     let playerName = document.forms["adatok"]["playerName"].value 
-    let nevhiba = nevEllenorzes(playerName)
-    if (nevhiba != ""){
-        document.getElementById("hibaUzenet").innerHTML = nevhiba
-        return
-    }
-    else{
-        document.getElementById("hibaUzenet").innerHTML = "" 
-    }
-    
-
     let playerEmail = document.forms["adatok"]["email"].value
-    let emailhiba = nevEllenorzes(playerEmail)
-    if (emailhiba != ""){
-        document.getElementById("hibaUzenet").innerHTML = emailhiba
-        return
+    try {
+        if (!nevEllenorzes(playerName)) throw new Error()
+        if (!emailEllenorzes(playerEmail)) throw new Error()
+        document.getElementById('mainform').style.display = 'none' 
+    } catch (error) {
+        return false
     }
-    else{
-        document.getElementById("hibaUzenet").innerHTML = "" 
-    }
-    document.getElementById('mainform').style.display = 'none' 
+
 }
 
 function nevEllenorzes(nev){
@@ -37,19 +26,18 @@ function nevEllenorzes(nev){
         if(nev.length < 7) throw "Túl rövid a név"
         if(nev.length > 21) throw "Túl hosszú a név"
         if(!pattern.test(nev)) throw "Ne tartalmazzon számot"
-        return ""
     } catch (error) {
-        return error;   
+        document.getElementById("hibaUzenet").innerHTML = error
+        return false
     }
-
-
+    Nev = nev
+    return true
 }
-
 function emailEllenorzes(email){
     try {
         if(!email.includes('@')) throw "tartalmaznia kell @ karaktert"
-
-        const [name,domain] = email.split('@')
+        const name = email.split('@')[0]
+        const domain = email.split('@')[1]
 
         if(!name) throw "Nincs előtagja az emailnak"
 
@@ -57,15 +45,17 @@ function emailEllenorzes(email){
 
         if(!domain.includes('.')) throw "A domainnek tartalmaznia kell pontot"
 
-        if(/[\s@]/.test(neve)) throw "Nem tartalmazhat szóközt az email"
-
-        return ""
+        if(/[\s@]/.test(name)) throw "Nem tartalmazhat szóközt az email"
 
     } catch (error) {
-        return error
+        document.getElementById("hibaUzenet").innerHTML = error
+        return false
     }
-
+    return true
 }
+
+
+
 
 
 function jatek(userChoice){
