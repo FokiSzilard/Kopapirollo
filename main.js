@@ -45,7 +45,12 @@ function emailEllenorzes(email){
 
         if(!domain.includes('.')) throw "A domainnek tartalmaznia kell pontot"
 
+        const pontjobb = domain.split('.')[1]
+
+        if(!pontjobb) throw "A pont után nincs végződés"
+
         if(/[\s@]/.test(name)) throw "Nem tartalmazhat szóközt az email"
+
 
     } catch (error) {
         document.getElementById("hibaUzenet").innerHTML = error
